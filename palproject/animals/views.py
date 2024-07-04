@@ -1,8 +1,14 @@
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponsePermanentRedirect
+from django.shortcuts import render
 from django.urls import reverse
 
+
 def index(request):
-    return HttpResponse('Главна страница')
+    return render(request, 'animals/index.html')
+
+
+def about(request):
+    return render(request, 'animals/about.html')
 
 
 def categories(request, cat_id):
