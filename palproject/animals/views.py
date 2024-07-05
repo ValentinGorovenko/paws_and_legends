@@ -2,13 +2,19 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponsePermanen
 from django.shortcuts import render
 from django.urls import reverse
 
+menu = ["О сайте", "Добавить статью", "Обратная связь", "Войти"]
+
 
 def index(request):
-    return render(request, 'animals/index.html')
+    data = {'title': 'Главная страница',
+            'menu': menu}
+    return render(request, 'animals/index.html', data)
 
 
 def about(request):
-    return render(request, 'animals/about.html')
+    data = {'title': 'О сайте',
+            'menu': menu}
+    return render(request, 'animals/about.html', data)
 
 
 def categories(request, cat_id):
