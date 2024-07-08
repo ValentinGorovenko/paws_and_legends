@@ -4,10 +4,17 @@ from django.urls import reverse
 
 menu = ["О сайте", "Добавить статью", "Обратная связь", "Войти"]
 
+data_db = [
+    {'id': 1, 'title': 'Белка и Стрелка', 'content': 'История о Белке и Стрелке', 'is_published': True},
+    {'id': 2, 'title': 'Хатико', 'content': 'Легенда о Хатико', 'is_published': True},
+    {'id': 3, 'title': 'Овца Долли', 'content': 'Статья о Овце Долли', 'is_published': False},
+]
+
 
 def index(request):
     data = {'title': 'Главная страница',
-            'menu': menu}
+            'menu': menu,
+            'posts': data_db}
     return render(request, 'animals/index.html', data)
 
 
