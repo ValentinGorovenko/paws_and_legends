@@ -7,7 +7,7 @@ menu = ["О сайте", "Добавить статью", "Обратная св
 data_db = [
     {'id': 1, 'title': 'Белка и Стрелка', 'content': 'История о Белке и Стрелке', 'is_published': True},
     {'id': 2, 'title': 'Хатико', 'content': 'Легенда о Хатико', 'is_published': True},
-    {'id': 3, 'title': 'Овца Долли', 'content': 'Статья о Овце Долли', 'is_published': False},
+    {'id': 3, 'title': 'Овца Долли', 'content': 'Статья об Овце Долли', 'is_published': False},
 ]
 
 
