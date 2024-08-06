@@ -11,12 +11,18 @@ data_db = [
     {'id': 2, 'title': 'Хатико', 'content': 'Легенда о Хатико', 'is_published': True},
     {'id': 3, 'title': 'Овца Долли', 'content': 'Статья об Овце Долли', 'is_published': False},
 ]
+cats_db = [
+    {'id': 1, 'name': 'Домашние животные'},
+    {'id': 2, 'name': 'Дикие животные'},
+]
 
 
 def index(request):
     data = {'title': 'Главная страница',
             'menu': menu,
-            'posts': data_db}
+            'posts': data_db,
+            'cat_selected': 0,
+            }
     return render(request, 'animals/index.html', data)
 
 
@@ -40,6 +46,17 @@ def contact(request):
 
 def login(request):
     return HttpResponse("Авторизация")
+
+
+def show_category(request, cat_id):
+    data = {
+        'title': 'Отображение по рубрикам',
+        'menu': menu,
+        'posts': data_db,
+        'cat_selected': cat_id,
+    }
+
+    return render(request, 'animals/index.html', context=data)
 
 
 def page_not_found(request, exception):
