@@ -1,5 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+
+from .models import Animal
 
 menu = [{'title': "О сайте", 'url_name': 'about'},
         {'title': "Добавить статью", 'url_name': 'add_page'},
@@ -18,9 +20,10 @@ cats_db = [
 
 
 def index(request):
+    posts = Animal.objects.filter(is_published=1)
     data = {'title': 'Главная страница',
             'menu': menu,
-            'posts': data_db,
+            'posts': posts,
             'cat_selected': 0,
             }
     return render(request, 'animals/index.html', data)
@@ -32,8 +35,17 @@ def about(request):
     return render(request, 'animals/about.html', data)
 
 
-def show_post(request, post_id):
-    return HttpResponse(f"Отображение статьи с id = {post_id}")
+def show_post(request, post_slug):
+    post = get_object_or_404(Animal, slug=post_slug)
+
+    data = {
+        'title': post.title,
+        'menu': menu,
+        'post': post,
+        'cat_selected': 1,
+    }
+
+    return render(request, 'animals/post.html', context=data)
 
 
 def addpage(request):
