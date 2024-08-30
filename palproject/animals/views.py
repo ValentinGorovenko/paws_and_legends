@@ -20,7 +20,7 @@ cats_db = [
 
 
 def index(request):
-    posts = Animal.objects.filter(is_published=1)
+    posts = Animal.published.all()
     data = {'title': 'Главная страница',
             'menu': menu,
             'posts': posts,
