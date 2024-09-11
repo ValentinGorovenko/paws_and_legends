@@ -31,8 +31,8 @@ class Animal(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=255)
+    name = models.CharField(max_length=100, db_index=True)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True)
 
     def __str__(self):
         return self.name
