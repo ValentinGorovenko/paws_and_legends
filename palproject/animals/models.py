@@ -19,6 +19,7 @@ class Animal(models.Model):
     time_update = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(choices=Status.choices, default=Status.PUBLISHED)
     cat = models.ForeignKey('Category', on_delete=models.PROTECT)
+    tags = models.ManyToManyField('TagPost', blank=True, related_name='tags')
 
     objects = models.Manager()
     published = PublishedModel()
@@ -39,3 +40,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class TagPost(models.Model):
+    tag = models.CharField(max_length=100, db_index=True)
+    slug = models.SlugField(max_length=100, unique=True, db_index=True)
+
+    def __str__(self):
+        return self.tag
