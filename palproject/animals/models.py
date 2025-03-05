@@ -20,6 +20,8 @@ class Animal(models.Model):
     is_published = models.BooleanField(choices=Status.choices, default=Status.PUBLISHED)
     cat = models.ForeignKey('Category', on_delete=models.PROTECT)
     tags = models.ManyToManyField('TagPost', blank=True, related_name='tags')
+    country = models.OneToOneField('Country', on_delete=models.SET_NULL,
+                                   null=True, blank=True, related_name='animal')
 
     objects = models.Manager()
     published = PublishedModel()
@@ -51,3 +53,10 @@ class TagPost(models.Model):
 
     def get_absolute_url(self):
         return reverse('tag', kwargs={'tag_slug': self.slug})
+
+
+class Country(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
